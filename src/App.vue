@@ -2,7 +2,7 @@
   <div class="w-full h-screen bg-gradient-to-b from-[#a9c23f] to-white p-6 justify-between text-center">
     <div class="w-full md:w-4/5 xl:w-2/3 mx-auto bg-white">
       <div class="p-6">
-        <img alt="Verra Mobility" src="https://verra.live/half_logo.jpg" class="w-32" />
+        <img alt="Verra Mobility" src="/src/assets/half_logo.jpg" class="w-32" />
       </div>
     </div>
     <div v-if="!verified" class="w-full md:w-4/5 xl:w-1/2 mx-auto my-20">
