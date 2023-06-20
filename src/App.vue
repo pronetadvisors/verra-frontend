@@ -86,8 +86,8 @@ onMounted(() => {
 const submitPassword = async (): Promise<void> => {
   if (password.value === "verra") {
     admin_verified.value = true;
-    // const { data } = await axios.get("https://verra.live/api/emails");
-    const { data } = await axios.get("http://localhost:3000/api/emails");
+    const { data } = await axios.get("https://verra.live/api/emails");
+    // const { data } = await axios.get("http://localhost:3000/api/emails");
     users.value = data["emails"];
   } else {
     alert("Incorrect password.");
