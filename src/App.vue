@@ -62,6 +62,25 @@ const submitEmail = async ():Promise<void> => {
     loading.value = false;
   }
 }
+
+const IncrementTime = async (): Promise<void> => {
+  try {
+    const data = await axios.post("https://verra.live/api/increment", {email: email.value})
+    // const data = await axios.post("http://localhost:3000/api/increment", {email: email.value})
+    if(data.status == 200){
+      return;
+    } else {
+      console.log("Error logging your time.");
+      return;
+    }
+  } catch (e) {
+    console.log("Error logging your time.");
+    return;
+  }
+}
+
+//Run incrementTime every 5 minutes
+setInterval(IncrementTime, 300000);
 </script>
 
 
