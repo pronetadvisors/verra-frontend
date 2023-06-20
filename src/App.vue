@@ -73,6 +73,7 @@ const users = ref<User[]>();
 type User = {
   email: string;
   time_viewed: number;
+  created_at: string;
 }
 
 onMounted(() => {
