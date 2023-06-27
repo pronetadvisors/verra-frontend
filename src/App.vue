@@ -8,6 +8,7 @@
     <div v-if="admin" class="w-full md:w-4/5 xl:w-1/2 mx-auto my-20">
       <div v-if="!admin_verified" class="bg-white rounded-2xl p-12">
         <h1 class="text-xl font-semibold pb-10">Administrator Password:</h1>
+        <h6>For demo, password is: Mookie</h6>
         <input class="w-1/2 border rounded p-2" type="password" v-model="password" placeholder="*****">
         <br>
         <br>
@@ -84,7 +85,7 @@ onMounted(() => {
 })
 
 const submitPassword = async (): Promise<void> => {
-  if (password.value === "verra") {
+  if (password.value === "Mookie") {
     admin_verified.value = true;
     const { data } = await axios.get("https://broadcast.raajpatel.dev/api/emails");
     // const { data } = await axios.get("http://localhost:3000/api/emails");
