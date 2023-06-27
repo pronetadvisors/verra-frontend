@@ -1,8 +1,8 @@
 <template>
-  <div class="w-full h-screen bg-gradient-to-b from-[#a9c23f] to-white p-6 justify-between text-center">
+  <div class="w-full h-screen bg-white p-6 justify-between text-center">
     <div class="w-full md:w-4/5 xl:w-2/3 mx-auto bg-white">
-      <div class="p-6">
-        <img alt="Verra Mobility" src="/src/assets/half_logo.jpg" class="w-32" />
+      <div class="p-6 bg-transparent">
+        <img alt="NOC4" src="/src/assets/noc4.png" class="w-20 bg-transparent" />
       </div>
     </div>
     <div v-if="admin" class="w-full md:w-4/5 xl:w-1/2 mx-auto my-20">
@@ -43,7 +43,7 @@
         <br>
         <p v-if="error != ''" class="text-red-500 mt-2">Error: {{ error }}</p>
         <br>
-        <button class="mt-2 rounded border border-[#a9c23f] py-2 px-4 hover:bg-[#a9c23f] hover:text-white transition" @click="submitEmail">
+        <button class="mt-2 rounded border border-yellow-400 py-2 px-4 hover:bg-yellow-400 hover:text-white transition" @click="submitEmail">
           <span v-if="loading">Loading...</span>
           <span v-else>Start Viewing</span>
         </button>
@@ -86,7 +86,7 @@ onMounted(() => {
 const submitPassword = async (): Promise<void> => {
   if (password.value === "verra") {
     admin_verified.value = true;
-    const { data } = await axios.get("https://verra.live/api/emails");
+    const { data } = await axios.get("https://broadcast.raajpatel.dev/api/emails");
     // const { data } = await axios.get("http://localhost:3000/api/emails");
     users.value = data["emails"];
   } else {
@@ -106,7 +106,7 @@ const downloadJSON = (): void => {
 }
 
 const validEmail = ():boolean => {
-  return email.value.includes("@");
+  return email.value.includes("@") || email.value === "";
 }
 
 const submitEmail = async ():Promise<void> => {
@@ -114,9 +114,13 @@ const submitEmail = async ():Promise<void> => {
     error.value = "Please enter a valid email address";
     return;
   }
+  if(email.value === ""){
+    verified.value = true;
+    loading.value = false;
+  }
   try {
     loading.value = true;
-    const data = await axios.post("https://verra.live/api/email", {email: email.value})
+    const data = await axios.post("https://broadcast.raajpatel.dev/api/email", {email: email.value})
     // const data = await axios.post("http://localhost:3000/api/email", {email: email.value})
     if(data.status == 200){
       error.value = "";
@@ -134,8 +138,9 @@ const submitEmail = async ():Promise<void> => {
 }
 
 const IncrementTime = async (): Promise<void> => {
+  if (email.value === "") return;
   try {
-    const data = await axios.post("https://verra.live/api/increment", {email: email.value})
+    const data = await axios.post("https://broadcast.raajpatel.dev/api/increment", {email: email.value})
     // const data = await axios.post("http://localhost:3000/api/increment", {email: email.value})
     if(data.status == 200){
       return;
